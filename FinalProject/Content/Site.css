@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
+    background-color: rgb(226, 240, 217);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -14,4 +14,34 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.navbar {
+    background-color: rgb(197, 224, 181);
+    border: 1px solid rgb(188,155,62);
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    margin-top: 20px;
+}
+
+#auth-area {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#auth-area li {
+    height: 40px;
+}
+
+#auth-area li a {
+    line-height: 10px; 
+}
+
+.navbar a:hover {
+    background-color: rgb(226, 240, 217);
+}
+
+.nav li a:hover {
+    background-color: rgb(226, 240, 217);
 }
