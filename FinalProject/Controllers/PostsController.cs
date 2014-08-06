@@ -4,15 +4,32 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using FinalProject.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace FinalProject.Controllers
 {
     public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Posts
         public ActionResult Index()
@@ -39,8 +56,13 @@ namespace FinalProject.Controllers
         // GET: Posts/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
+                return View();
+            }
+            ViewBag.ReturnUrl = Url.Action("Create");
+            return RedirectToAction("Login","Account");
         }
 
         // POST: Posts/Create
@@ -48,32 +70,43 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,Title,Content,CreationDate")] Post post)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content")] Post post)
         {
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated)
             {
-                db.Posts.Add(post);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                post.CreationDate = DateTime.UtcNow;
+                if (ModelState.IsValid)
+                {
+                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    user.Posts.Add(post);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", post.UserId);
-            return View(post);
+                ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", post.UserId);
+                return View(post);
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: Posts/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Post post = db.Posts.Find(id);
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (post == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", post.UserId);
+            if (!post.User.Equals(user))
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", post.UserId);
             return View(post);
         }
 
@@ -82,7 +115,7 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Title,Content,CreationDate")] Post post)
+        public ActionResult Edit([Bind(Include = "Title,Content")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +123,7 @@ namespace FinalProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", post.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", post.UserId);
             return View(post);
         }
 
