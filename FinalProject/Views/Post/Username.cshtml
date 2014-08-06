@@ -1,0 +1,27 @@
+﻿@model FinalProject.Models.ApplicationUser
+
+@{
+    ViewBag.Title = Model.UserName;
+}
+
+<h2>Posts by @Model.UserName</h2>
+<hr/>
+<ul class="post-list">
+    @foreach (var post in Model.Posts)
+    {
+        <li class="post-list-item">
+            @Html.ActionLink(post.Title, "Details", new {id=post.Id}, new {@class="post-list-item-title"})
+            <br/>
+            @if (post.Content.Length > 255)
+            {
+                var x =post.Content.Substring(0, 255) + "...";
+                @x
+            }
+            else
+            {
+                @post.Content
+            }
+        </li>
+    }
+</ul>
+
