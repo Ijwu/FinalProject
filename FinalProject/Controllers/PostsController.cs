@@ -70,15 +70,15 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content")] Post post)
+        public async Task<ActionResult> Create([Bind(Include = "Title,Content")] Post post)
         {
             if (User.Identity.IsAuthenticated)
             {
+                post.UserId = User.Identity.GetUserId();
                 post.CreationDate = DateTime.UtcNow;
                 if (ModelState.IsValid)
                 {
-                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                    user.Posts.Add(post);
+                    db.Posts.Add(post);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -102,7 +102,8 @@ namespace FinalProject.Controllers
             {
                 return HttpNotFound();
             }
-            if (!post.User.Equals(user))
+            var poster = await UserManager.FindByIdAsync(post.UserId);
+            if (!poster.Equals(user))
             {
                 return RedirectToAction("Index");
             }
@@ -115,7 +116,7 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Title,Content")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content,UserId,CreationDate")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -128,7 +129,7 @@ namespace FinalProject.Controllers
         }
 
         // GET: Posts/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -138,6 +139,12 @@ namespace FinalProject.Controllers
             if (post == null)
             {
                 return HttpNotFound();
+            }
+            var poster = await UserManager.FindByIdAsync(post.UserId);
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (!poster.Equals(user))
+            {
+                return RedirectToAction("Index");
             }
             return View(post);
         }
