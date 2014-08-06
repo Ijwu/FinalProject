@@ -6,10 +6,10 @@ Final Project for ExperienceIT at Grand Circus
 
 Team
 ====
-Natalie Cobb
-Carmelita Wingate
-Devin Davis
-Hussein Farran
+* Natalie Cobb
+* Carmelita Wingate
+* Devin Davis
+* Hussein Farran
 
 Description
 ===========
