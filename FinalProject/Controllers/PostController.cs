@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using FinalProject.Models;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using WebGrease.Css.Extensions;
 
 namespace FinalProject.Controllers
 {
@@ -38,7 +41,7 @@ namespace FinalProject.Controllers
             return View(posts.ToList());
         }
 
-        // GET: Posts/Details/5
+        // GET: Post/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -50,10 +53,29 @@ namespace FinalProject.Controllers
             {
                 return HttpNotFound();
             }
+            if (post.User == null)
+            {
+                post.User = UserManager.FindById(post.UserId);
+            }
             return View(post);
         }
 
-        // GET: Posts/Create
+        //GET: Post/Username/Ijwu
+        public async Task<ActionResult> Username(string username)
+        {
+            if (username.IsNullOrWhiteSpace())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(user);
+        }
+
+        // GET: Post/Create
         public ActionResult Create()
         {
             if (User.Identity.IsAuthenticated)
@@ -65,7 +87,7 @@ namespace FinalProject.Controllers
             return RedirectToAction("Login","Account");
         }
 
-        // POST: Posts/Create
+        // POST: Post/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -76,6 +98,7 @@ namespace FinalProject.Controllers
             {
                 post.UserId = User.Identity.GetUserId();
                 post.CreationDate = DateTime.UtcNow;
+                //post.User = await UserManager.FindByIdAsync(post.UserId);
                 if (ModelState.IsValid)
                 {
                     db.Posts.Add(post);
@@ -89,7 +112,7 @@ namespace FinalProject.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Posts/Edit/5
+        // GET: Post/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -111,7 +134,7 @@ namespace FinalProject.Controllers
             return View(post);
         }
 
-        // POST: Posts/Edit/5
+        // POST: Post/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -128,7 +151,7 @@ namespace FinalProject.Controllers
             return View(post);
         }
 
-        // GET: Posts/Delete/5
+        // GET: Post/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,7 +172,7 @@ namespace FinalProject.Controllers
             return View(post);
         }
 
-        // POST: Posts/Delete/5
+        // POST: Post/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

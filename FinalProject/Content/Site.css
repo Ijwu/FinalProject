@@ -45,3 +45,32 @@ textarea {
 .nav li a:hover {
     background-color: rgb(226, 240, 217);
 }
+
+#poster {
+    color: #B3B3B3;
+    font-size: 8px;
+}
+
+.post-list {
+    list-style: none;
+}
+
+.post-list-item {
+    margin: 10px 0 ;
+}
+
+.post-list-item-title {
+    font-weight: bold;
+    font-size: 24px;
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+.post-list-item-title:hover {
+    text-decoration: none;
+}
+
+hr {
+    color: #a6d08d;
+    border-color: #a6d08d;
+}

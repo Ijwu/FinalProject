@@ -14,6 +14,12 @@ namespace FinalProject
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Username",
+                url: "Post/Username/{username}",
+                defaults: new { controller = "Post", action = "Username" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

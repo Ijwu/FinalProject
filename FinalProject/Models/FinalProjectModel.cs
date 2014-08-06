@@ -19,7 +19,7 @@ namespace FinalProject.Models
         public DateTime CreationDate { get; set; }
 
         [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 
     public class BudgetBox
@@ -38,7 +38,7 @@ namespace FinalProject.Models
         public virtual ICollection<Transaction> Transactions { get; set; }
 
         [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 
     public class Transaction
