@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace FinalProject.Controllers
 {
-    public class PostsController : Controller
+    public class PostController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
