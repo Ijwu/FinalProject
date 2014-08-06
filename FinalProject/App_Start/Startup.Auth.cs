@@ -50,11 +50,11 @@ namespace FinalProject
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "645969206713-66b91aklpivbog8qrtkt0j6nejqbumh4.apps.googleusercontent.com",
+                ClientSecret = "9a7FYgcVaP8zQiS9OBsMyxtU"
+            });
         }
     }
 }
