@@ -22,6 +22,8 @@ namespace FinalProject.Models
         [DataType(DataType.ImageUrl)]
         public string ProfilePhotoPath { get; set; }
 
+        public bool DisplayRealName { get; set; }
+
         public virtual ICollection<Post> Posts { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

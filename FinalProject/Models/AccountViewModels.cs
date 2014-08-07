@@ -46,6 +46,13 @@ namespace FinalProject.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "New Email Address")]
+        public string NewEmailAddress { get; set; }
+
+        [Display(Name = "Show your real name on your profile page?")]
+        public bool DisplayRealName { get; set; }
     }
 
     public class LoginViewModel
