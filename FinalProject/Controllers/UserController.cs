@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
@@ -24,9 +26,14 @@ namespace FinalProject.Controllers
         }
 
         // GET: User
-        public ActionResult Index()
+        public async Task<ActionResult> Index(string username)
         {
-            return View();
+            var user = await UserManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+            return View(user);
         }
     }
 }
