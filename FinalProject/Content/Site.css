@@ -74,3 +74,20 @@ hr {
     color: #a6d08d;
     border-color: #a6d08d;
 }
+
+.form-group input[type=checkbox] {
+    transition: none;
+    box-shadow: none;
+    -webkit-transition: none;
+    -webkit-box-shadow: none;
+    width: 40px;
+    height: 40px;
+}
+
+input[type=checkbox]:focus {
+    border: none;
+}
+
+.form-group {
+    text-align: center;
+}
