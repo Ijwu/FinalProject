@@ -50,7 +50,5 @@ namespace FinalProject.Models
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<BudgetBox> BudgetBoxs { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
-
-        public System.Data.Entity.DbSet<FinalProject.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
