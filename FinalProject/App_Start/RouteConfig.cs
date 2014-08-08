@@ -20,8 +20,8 @@ namespace FinalProject
             );
 
             routes.MapRoute(
-                name: "Username",
-                url: "Posts/Username/{username}",
+                name: "UserPosts",
+                url: "Posts/{username}",
                 defaults: new { controller = "Post", action = "Username" }
             );
 
