@@ -56,4 +56,43 @@ namespace FinalProject.Models
 
         public virtual BudgetBox BudgetBox { get; set; }
     }
+    public class PostComment
+    {
+        [Key]
+        public int Id {get; set;}
+        [Required]
+        public String PostId {get; set;}
+        [Required]
+        public string UserId {get; set;}
+        [Required]
+        public string Text {get; set;}
+
+        public virtual Post Post {get; set;}
+    }
+    public class ProfileComment
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public String ProfileId { get; set; }
+        [Required]
+        public string UserId { get; set; }
+        [Required]
+        public string Text { get; set; }
+
+        [ForeignKey("ProfileId")]
+        public virtual ApplicationUser Profile { get; set; }
+    }
+    public class Rating
+    {
+        [Key]
+        public int Id {get; set;}
+        [Required]
+        public int Stars {get; set;}
+        [Required]
+        public int PostId {get; set;}
+        [Required]
+        public string UserId {get; set;}
+
+    }
 }
