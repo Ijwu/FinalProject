@@ -5,48 +5,22 @@
 }
 
 <h2>@Model.UserName</h2>
+<p style="float:left;">@Model.FirstName @Model.LastName</p>
+<p style="float: right;">@Html.RouteLink("View all posts by this user.","Username",new {username=Model.UserName})</p>
+<br/>
+<hr/>
 
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DisplayRealName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DisplayRealName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-    </dl>
+<div class="post-list">
+    <h4>@Model.UserName's most recent post:</h4>
+    <div class="post-list-item">
+        @{
+            var post = Model.Posts.Single(x => x.CreationDate == Model.Posts.Select(y => y.CreationDate).Min());
+            <h5>
+                @Html.ActionLink(post.Title, "Details", "Post", new { id = post.Id }, new { @class = "post-list-item-title" })
+            </h5>
+            <p>
+                @post.Content
+            </p>
+        }
+    </div>
 </div>
