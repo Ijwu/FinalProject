@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace FinalProject.Controllers
@@ -28,6 +29,10 @@ namespace FinalProject.Controllers
         // GET: User
         public async Task<ActionResult> Index(string username)
         {
+            if (username.IsNullOrWhiteSpace())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var user = await UserManager.FindByNameAsync(username);
             if (user == null)
             {
