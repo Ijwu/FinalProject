@@ -6,7 +6,7 @@
 
 <div>
     <h2>@Html.DisplayFor(model => model.Title)</h2>
-    <p id="poster">Posted by @Html.ActionLink(Model.User.UserName, "Details", "Post", new {id=Model.Id})</p>
+    <p id="poster">Posted by @Html.RouteLink(Model.User.UserName, "Profile", new {id=Model.Id}, null)</p>
     @*TODO: Make this link go to the user's profile page as soon as profile pages are added.*@
     <hr />
     <p>@Html.DisplayTextFor(model => model.Content)</p>

@@ -6,7 +6,7 @@
 
 <h2>@Model.UserName</h2>
 <p style="float:left;">@Model.FirstName @Model.LastName</p>
-<p style="float: right;">@Html.RouteLink("View all posts by this user.","Username",new {username=Model.UserName})</p>
+<p style="float: right;">@Html.RouteLink("View all posts by this user.","UserPosts",new {username=Model.UserName})</p>
 <br/>
 <hr/>
 
