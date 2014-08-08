@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,6 +29,10 @@
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <li>@Html.ActionLink("Posts", "Index", "Post")</li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li>@Html.RouteLink("Profile", "Profile", new { username = User.Identity.GetUserName() })</li>
+                        }
                     </ul>
                 </div>
             </div>
