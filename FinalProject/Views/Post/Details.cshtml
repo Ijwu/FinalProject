@@ -1,4 +1,5 @@
-﻿@model FinalProject.Models.Post
+﻿@using Microsoft.AspNet.Identity
+@model FinalProject.Models.Post
 
 @{
     ViewBag.Title = Model.Title;
@@ -6,12 +7,23 @@
 
 <div>
     <h2>@Html.DisplayFor(model => model.Title)</h2>
-    <p id="poster">Posted by @Html.RouteLink(Model.User.UserName, "Profile", new {id=Model.Id}, null)</p>
-    @*TODO: Make this link go to the user's profile page as soon as profile pages are added.*@
+    <p id="poster">Posted by @Html.RouteLink(Model.User.UserName, "Profile", new {username=Model.User.UserName}, null)</p>
     <hr />
     <p>@Html.DisplayTextFor(model => model.Content)</p>
 </div>
 
+@if (Request.IsAuthenticated)
+{
+    if (User.Identity.GetUserId() == Model.UserId)
+    {
+        <hr />
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+             | 
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+        </p>
+    }
+}
 @* TODO: Make appropriate links here.
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
