@@ -24,8 +24,8 @@ namespace FinalProject
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/cyborg.min.css",
-                      "~/Content/cyborg.css"));
+                      "~/Content/flatly.min.css",
+                      "~/Content/flatly.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
