@@ -16,7 +16,7 @@
         <h4>@Model.UserName's most recent post:</h4>
         <div class="post-list-item">
             @{
-                var post = Model.Posts.Single(x => x.CreationDate == Model.Posts.Select(y => y.CreationDate).Min());
+                var post = Model.Posts.Single(x => x.CreationDate == Model.Posts.Select(y => y.CreationDate).Max());
                 <h5>
                     @Html.ActionLink(post.Title, "Details", "Post", new {id = post.Id}, new {@class = "post-list-item-title"})
                 </h5>
