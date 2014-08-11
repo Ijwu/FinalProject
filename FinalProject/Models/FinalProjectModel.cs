@@ -54,6 +54,9 @@ namespace FinalProject.Models
         [Required]
         public int Quantity { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+
         public virtual BudgetBox BudgetBox { get; set; }
     }
     public class PostComment
