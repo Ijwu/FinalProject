@@ -21,6 +21,8 @@ namespace FinalProject.Models
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
+
+        public virtual ICollection<BudgetBox> BudgetBoxs { get; set; } 
     }
 
     public class BudgetBox

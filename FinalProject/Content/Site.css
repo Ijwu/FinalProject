@@ -91,3 +91,52 @@ input[type=checkbox]:focus {
 .form-group {
     text-align: center;
 }
+
+.budget-box {
+    list-style: none;
+    padding: 20px;
+    border: 2px gray solid;
+    background-color: lightgrey;
+    width: 360px;
+}
+
+.budget-box-title {
+    font-weight: bold;
+    line-height: 20px;
+    margin-top: 10px;
+    border-bottom: 1px solid black;
+}
+
+.budget-box-title .budget-addition {
+    border: none;
+}
+
+.budget-box-total {
+    font-weight: bold;
+    border-top: 1px solid black;
+}
+
+.budget-box-item {
+}
+
+.budget-addition, .budget-deduction {
+    float: right;
+}
+
+.budget-addition {
+    color: green;
+}
+
+.budget-addition:before {
+    color: green;
+    content: "+";
+}
+
+.budget-deduction {
+    color: red;
+}
+
+.budget-deduction:before {
+    color: red;
+    content: "-";
+}

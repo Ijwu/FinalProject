@@ -235,6 +235,7 @@
     <Content Include="Views\Post\Username.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_DisqusIntegration.cshtml" />
+    <Content Include="Views\Shared\_BudgetBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,23 @@
+﻿@model FinalProject.Models.BudgetBox
+
+@{
+    var total = Model.StartingAmount + Model.Transactions.Select(x => x.Quantity*x.UnitPrice).Sum();
+}
+
+<ul class="budget-box">
+    <li class="budget-box-title">
+        @Model.Title
+        <span class="budget-addition">@Model.StartingAmount.ToString("C")</span>
+    </li>
+    @foreach (var trans in Model.Transactions)
+    {
+        <li class="budget-box-item">
+            @trans.Description (x @trans.Quantity)
+            <span class="@Html.Raw(trans.UnitPrice > 0 ? "budget-addition" : "budget-deduction")">@Html.Raw((trans.UnitPrice*trans.Quantity).ToString("C"))</span>
+        </li>
+    }
+    <li class="budget-box-total">
+        Total
+        <span class="@Html.Raw(total > 0 ? "budget-addition" : "budget-deduction")">@total.ToString("C")</span>
+    </li>
+</ul>

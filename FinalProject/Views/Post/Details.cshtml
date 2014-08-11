@@ -5,11 +5,21 @@
     ViewBag.Title = Model.Title;
 }
 
-<div>
-    <h2>@Html.DisplayFor(model => model.Title)</h2>
-    <p id="poster">Posted by @Html.RouteLink(Model.User.UserName, "Profile", new {username=Model.User.UserName}, null)</p>
-    <hr />
-    <p>@Html.DisplayTextFor(model => model.Content)</p>
+<div class="row">
+    <div class="col-md-8">
+        <h2>@Html.DisplayFor(model => model.Title)</h2>
+        <p id="poster">Posted by @Html.RouteLink(Model.User.UserName, "Profile", new { username = Model.User.UserName }, null)</p>
+        <hr />
+        <p>@Html.DisplayTextFor(model => model.Content)</p>
+    </div>
+    <div class="col-md-2">
+        @{
+            foreach (var box in Model.BudgetBoxs)
+            {
+                Html.RenderPartial("_BudgetBox", box);
+            }
+        }       
+    </div>
 </div>
 
 @if (Request.IsAuthenticated)

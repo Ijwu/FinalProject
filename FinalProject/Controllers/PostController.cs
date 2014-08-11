@@ -183,6 +183,12 @@ namespace FinalProject.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult GetBudgetBox(int id)
+        {
+            var box = db.BudgetBoxs.First(x => x.Id == id);
+            return PartialView("_BudgetBox", box);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
