@@ -26,7 +26,7 @@ namespace FinalProject.Models
     {
         [Key]
         public int Id { get; set; }
-        public string UserId { get; set; }
+        public string PostId { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -37,8 +37,8 @@ namespace FinalProject.Models
 
         public virtual ICollection<Transaction> Transactions { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual ApplicationUser User { get; set; }
+        [ForeignKey("PostId")]
+        public virtual Post Post { get; set; }
     }
 
     public class Transaction
