@@ -15,6 +15,7 @@ namespace FinalProject.Models
         public string UserId { get; set; }
         [Required]
         public string Title { get; set; }
+        [Required]
         public string Content { get; set; }
         public DateTime CreationDate { get; set; }
 
@@ -64,27 +65,31 @@ namespace FinalProject.Models
         [Key]
         public int Id {get; set;}
         [Required]
-        public String PostId {get; set;}
+        public int PostId {get; set;}
         [Required]
         public string UserId {get; set;}
         [Required]
         public string Text {get; set;}
 
         public virtual Post Post {get; set;}
+        public virtual ApplicationUser User { get; set; }
     }
     public class ProfileComment
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        public String ProfileId { get; set; }
-        [Required]
+        public string ProfileId { get; set; }
+
         public string UserId { get; set; }
         [Required]
         public string Text { get; set; }
 
-        [ForeignKey("ProfileId")]
+        [ForeignKey("ProfileId")]   
         public virtual ApplicationUser Profile { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser User { get; set; }
     }
     public class Rating
     {
@@ -97,5 +102,7 @@ namespace FinalProject.Models
         [Required]
         public string UserId {get; set;}
 
+        public Post Post { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
