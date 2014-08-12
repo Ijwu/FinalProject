@@ -1,49 +1,20 @@
 ﻿body {
     padding-bottom: 20px;
-    background-color: rgb(226, 240, 217);
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
+input, select {
+    max-width: 256px;
+}
+
 textarea {
-    max-width: 280px;
-}
-
-.navbar {
-    background-color: rgb(197, 224, 181);
-    border: 1px solid rgb(188,155,62);
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
-    margin-top: 20px;
-}
-
-#auth-area {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-#auth-area li {
-    height: 40px;
-}
-
-#auth-area li a {
-    line-height: 10px; 
-}
-
-.navbar a:hover {
-    background-color: rgb(226, 240, 217);
-}
-
-.nav li a:hover {
-    background-color: rgb(226, 240, 217);
+    max-width: 560px;
+    min-height: 200px;
+    min-width: 500px;
 }
 
 #poster {
@@ -66,13 +37,8 @@ textarea {
     border-bottom: 1px solid black;
 }
 
-.post-list-item-title:hover {
+a.post-list-item-title:hover {
     text-decoration: none;
-}
-
-hr {
-    color: #a6d08d;
-    border-color: #a6d08d;
 }
 
 .form-group input[type=checkbox] {
@@ -89,7 +55,7 @@ input[type=checkbox]:focus {
 }
 
 .form-group {
-    text-align: center;
+    
 }
 
 .budget-box {

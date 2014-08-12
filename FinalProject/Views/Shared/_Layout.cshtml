@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Budjit</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -16,7 +16,6 @@
     
 </head>
     <body>
-        @Html.Partial("_LoginPartial")
         <br/>
         <div class="navbar">
             <div class="container">
@@ -26,8 +25,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a href="/Home/Index"><img src="http://s4.postimg.org/nam26kx7h/Budjitlogowhite.png" width="100" height="80"></a>
                 </div>
-                <a href="/Home/Index"><img src="http://s4.postimg.org/nam26kx7h/Budjitlogowhite.png" width="100" height="80"></a>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -39,6 +38,7 @@
                             <li>@Html.RouteLink("Profile", "Profile", new { username = User.Identity.GetUserName() })</li>
                         }
                     </ul>
+                    @Html.Partial("_LoginPartial")
                 </div>
             </div>
         </div>
