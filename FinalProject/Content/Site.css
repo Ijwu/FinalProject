@@ -106,3 +106,34 @@ input[type=checkbox]:focus {
     color: red;
     content: "-";
 }
+
+.budget-box-editor {
+    border: 1px solid #c2d0de;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.budget-box-editor-row {
+    margin: 10px;
+}
+
+.transaction-editor {
+    
+}
+
+.transaction-editor-row {
+    padding-left: 5px;
+    border: 1px solid #c2d0de;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+#addTransaction {
+    color: blue;
+}
+
+#addTransaction:hover {
+    text-decoration: none;
+    color: lightblue;
+}
