@@ -150,3 +150,14 @@ input[type=checkbox]:focus {
 #searchBox {
     margin: 20px;
 }
+
+.jumbotron {
+    background-color: #41bb19;
+    border-top: 5px solid #379e15;
+    border-radius: 0px;
+    color: #fafafa;
+}
+
+.container .jumbotron {
+    border-radius: 2px;
+}
