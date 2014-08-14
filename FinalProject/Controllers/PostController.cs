@@ -35,20 +35,6 @@ namespace FinalProject.Controllers
             }
         }
 
-        // GET: Posts
-        public ActionResult Index(string searchString)
-        {
-            var posts = db.Posts.ToList();
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                posts = (from s in db.Posts
-                            where s.Title.Contains(searchString) || s.Content.Contains(searchString)
-                            select s).ToList();
-               
-            }
-            return View(posts);
-        }
-
         // GET: Post/Details/5
         public ActionResult Details(int? id)
         {

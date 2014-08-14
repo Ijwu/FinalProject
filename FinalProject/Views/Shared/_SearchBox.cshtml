@@ -1,0 +1,10 @@
+﻿
+@{ Layout = null;}
+
+@using (Html.BeginForm("Index", "Search", FormMethod.Get, new { id = "searchBox", @class = "navbar-right" }))
+{
+    <div>
+        <input type="text" name="searchString" />
+        <button type="submit">Search</button>
+    </div>
+}

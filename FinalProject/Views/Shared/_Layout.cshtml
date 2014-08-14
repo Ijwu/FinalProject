@@ -17,6 +17,7 @@
 </head>
     <body>
         <a href="/Home/Index"><img src="~/Content/images/Budjitlogo1nobkgd.png" width="100" height="60"></a>
+        @Html.Partial("_SearchBox")
         <div class="navbar">
             <div class="container">
                 <div class="navbar-header">
@@ -32,7 +33,6 @@
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Posts", "Index", "Post")</li>
                         @if (Request.IsAuthenticated)
                         {
                             <li>@Html.RouteLink("Profile", "Profile", new { username = User.Identity.GetUserName() })</li>

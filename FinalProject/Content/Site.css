@@ -146,3 +146,7 @@ input[type=checkbox]:focus {
 .navbar li a:hover {
     background-color: #f3f3f3;
 }
+
+#searchBox {
+    margin: 20px;
+}
