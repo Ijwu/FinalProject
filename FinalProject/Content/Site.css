@@ -108,9 +108,7 @@ input[type=checkbox]:focus {
 }
 
 .budget-box-editor {
-    border: 1px solid #c2d0de;
-    border-radius: 10px;
-    padding: 5px;
+    text-align: center;
 }
 
 .budget-box-editor-row {
@@ -118,7 +116,7 @@ input[type=checkbox]:focus {
 }
 
 .transaction-editor {
-    
+    text-align: center;
 }
 
 .transaction-editor-row {
@@ -136,4 +134,15 @@ input[type=checkbox]:focus {
 #addTransaction:hover {
     text-decoration: none;
     color: lightblue;
+}
+
+.navbar {
+    background-color: #FAFAFA;
+    padding-bottom: 0;
+    border-top: 2px solid #379e15;
+    border-radius: 0;
+}
+
+.navbar li a:hover {
+    background-color: #f3f3f3;
 }
