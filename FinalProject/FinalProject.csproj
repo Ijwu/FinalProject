@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BeginCollectionItem">
+      <HintPath>..\packages\BeginCollectionItem.1.2.1.0\lib\net35\BeginCollectionItem.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -179,6 +182,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flatly.css" />
     <Content Include="Content\flatly.min.css" />
+    <Content Include="Content\images\Budjitlogo1nobkgd.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -238,10 +242,12 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_BudgetBox.cshtml" />
     <Content Include="Views\Shared\_DisqusIntegration.cshtml" />
+    <Content Include="Views\Shared\_BudgetBoxEditor.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Shared\_TransactionEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

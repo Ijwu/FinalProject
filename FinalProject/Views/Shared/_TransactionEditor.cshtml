@@ -1,0 +1,20 @@
+﻿@model FinalProject.Models.Transaction
+
+@{ Layout = null;}
+
+<div class="transaction-editor-row">
+    @using (Html.BeginCollectionItem("Transactions"))
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.BudgetBoxId)
+        <div>@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })</div>
+        <div>@Html.TextBoxFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })</div>
+
+        <div>@Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label" })</div>
+        <div>@Html.TextBoxFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })</div>
+
+        <div>@Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label" })</div>
+        <div>@Html.TextBoxFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })</div>
+        <a class="deleteTrans">Delete Transaction</a>
+    }
+</div>

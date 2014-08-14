@@ -1,0 +1,41 @@
+﻿@using System.Collections.ObjectModel
+@using FinalProject.Models
+@model FinalProject.Models.BudgetBox
+
+@{ Layout = null;}
+
+<div class="budget-box-editor-row">
+    @using (Html.BeginCollectionItem("BudgetBoxs"))
+    {
+        <div>@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })</div>
+        <div>@Html.TextBoxFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })</div>
+        <div>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</div>
+
+        <div>@Html.LabelFor(model => model.StartingAmount, htmlAttributes: new { @class = "control-label" })</div>
+        <div>@Html.EditorFor(model => model.StartingAmount, new { htmlAttributes = new { @class = "form-control" } })</div>
+        <div>@Html.ValidationMessageFor(model => model.StartingAmount, "", new { @class = "text-danger" })</div>
+        <div>
+            @if (Model.Transactions == null)
+            {
+                Model.Transactions = new Collection<Transaction>();
+            }
+            <fieldset class="transaction-editor" id="transaction-editor">
+                @using (Html.BeginCollectionItem("Transactions"))
+                {
+                    if (Model.Transactions.Count > 0)
+                    {
+                        foreach (var trans in Model.Transactions)
+                        {
+                            @Html.Partial("_TransactionEditor", trans)
+                        }
+                    }
+                    else
+                    {
+                        @Html.Partial("_TransactionEditor", new Transaction())
+                    }
+                }
+            </fieldset>
+            @Html.ActionLink("Add another Transaction", "BlankTransactionEditor", "Post", null, new { id = "addTransaction" })
+        </div>
+    }
+</div>

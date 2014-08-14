@@ -1,7 +1,7 @@
 ﻿@model FinalProject.Models.BudgetBox
 
 @{
-    var total = Model.StartingAmount + Model.Transactions.Select(x => x.Quantity*x.UnitPrice).Sum();
+    var total = Model.StartingAmount - Model.Transactions.Select(x => x.Quantity*x.UnitPrice).Sum();
 }
 
 <ul class="budget-box">
@@ -13,7 +13,7 @@
     {
         <li class="budget-box-item">
             @trans.Description (x @trans.Quantity)
-            <span class="@Html.Raw(trans.UnitPrice > 0 ? "budget-addition" : "budget-deduction")">@Html.Raw((trans.UnitPrice*trans.Quantity).ToString("C"))</span>
+            <span class="@Html.Raw(trans.UnitPrice < 0 ? "budget-addition" : "budget-deduction")">@Html.Raw((trans.UnitPrice*trans.Quantity).ToString("C"))</span>
         </li>
     }
     <li class="budget-box-total">

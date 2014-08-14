@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -81,7 +82,7 @@ namespace FinalProject.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
-                return View();
+                return View(new PostCreateViewModel());
             }
             ViewBag.ReturnUrl = Url.Action("Create");
             return RedirectToAction("Login","Account");
@@ -92,8 +93,18 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Title,Content")] Post post)
+        public async Task<ActionResult> Create([Bind(Include = "Title,Content,StartingAmount,Transactions")] PostCreateViewModel postModel)
         {
+            var post = new Post {Title = postModel.Title, Content = postModel.Content, BudgetBoxs = new List<BudgetBox>()};
+            var box = new BudgetBox
+            {
+                StartingAmount = postModel.StartingAmount,
+                Post = post,
+                Title = postModel.Title,
+                Transactions = new Collection<Transaction>()
+            };
+            postModel.Transactions.ForEach(x => box.Transactions.Add(x));
+            post.BudgetBoxs.Add(box);
             if (User.Identity.IsAuthenticated)
             {
                 post.UserId = User.Identity.GetUserId();
@@ -120,6 +131,7 @@ namespace FinalProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Post post = db.Posts.Find(id);
+            Debug.WriteLine(db.Entry(post).State);
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (post == null)
             {
@@ -131,7 +143,16 @@ namespace FinalProject.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", post.UserId);
-            return View(post);
+            return View(new PostEditViewModel
+            {
+                Id = id.Value,
+                Content = post.Content, 
+                StartingAmount = post.BudgetBoxs.First().StartingAmount,
+                Title = post.Title,
+                Transactions = post.BudgetBoxs.First().Transactions,
+                CreationDate = post.CreationDate,
+                UserId = post.UserId
+            });
         }
 
         // POST: Post/Edit/5
@@ -139,16 +160,41 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,UserId,CreationDate")] Post post)
+        public ActionResult Edit([Bind(Include = "Title,Content,StartingAmount,Transactions,UserId,CreationDate,Id")] PostEditViewModel postModel)
         {
+            var post = new Post
+            {
+                Id = postModel.Id,
+                BudgetBoxs = new List<BudgetBox>(),
+                Content = postModel.Content,
+                Title = postModel.Title,
+                UserId = postModel.UserId,
+                CreationDate = postModel.CreationDate
+            };
+            post.BudgetBoxs.Add(new BudgetBox
+            {
+                PostId = postModel.Id,
+                Post = post, 
+                Title = postModel.Title, 
+                StartingAmount = postModel.StartingAmount,
+                Transactions = postModel.Transactions
+            });
+            postModel.Transactions.ForEach(x => x.BudgetBox = post.BudgetBoxs.First());
+            //postModel.Transactions.ForEach(x => x.BudgetBoxId = post.BudgetBoxs.First().Id);
+            postModel.Transactions.ForEach(x =>
+            {
+                db.Transactions.Find(x.Id).Quantity = x.Quantity;
+                db.Transactions.Find(x.Id).UnitPrice = x.UnitPrice;
+                db.Transactions.Find(x.Id).Description = x.Description; //TODO: Fix this
+            });
             if (ModelState.IsValid)
             {
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Post", new { Id = post.Id });
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", post.UserId);
-            return View(post);
+            return RedirectToAction("Details", "Post", new {Id = post.Id});
         }
 
         // GET: Post/Delete/5
@@ -187,6 +233,16 @@ namespace FinalProject.Controllers
         {
             var box = db.BudgetBoxs.First(x => x.Id == id);
             return PartialView("_BudgetBox", box);
+        }
+
+        public ActionResult BlankBoxEditor()
+        {
+            return View("_BudgetBoxEditor", new BudgetBox());
+        }
+
+        public ActionResult BlankTransactionEditor()
+        {
+            return View("_TransactionEditor", new Transaction());
         }
 
         protected override void Dispose(bool disposing)

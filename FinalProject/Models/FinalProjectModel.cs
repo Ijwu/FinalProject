@@ -36,6 +36,7 @@ namespace FinalProject.Models
 
         [Required]
         [DataType(DataType.Currency)]
+        [Display(Name="Budget Starting Amount")]
         public double StartingAmount { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
@@ -52,6 +53,7 @@ namespace FinalProject.Models
 
         [Required]
         [DataType(DataType.Currency)]
+        [Display(Name = "Price per Unit")]
         public double UnitPrice { get; set; }
 
         [Required]
@@ -106,5 +108,44 @@ namespace FinalProject.Models
 
         public Post Post { get; set; }
         public ApplicationUser User { get; set; }
+    }
+
+    public class PostCreateViewModel
+    {
+        [Required]
+        public string Title { get; set; }
+
+        [Required]
+        public string Content { get; set; }
+
+        [Required]
+        [Display(Name="Starting Amount")]
+        public double StartingAmount { get; set; }
+        
+        public ICollection<Transaction> Transactions { get; set; }
+    }
+
+    public class PostEditViewModel
+    {
+        [Required]
+        public int Id { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
+
+        [Required]
+        public DateTime CreationDate { get; set; }
+
+        [Required]
+        public string Title { get; set; }
+
+        [Required]
+        public string Content { get; set; }
+
+        [Required]
+        [Display(Name = "Starting Amount")]
+        public double StartingAmount { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }
