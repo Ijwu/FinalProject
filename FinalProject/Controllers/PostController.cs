@@ -36,17 +36,24 @@ namespace FinalProject.Controllers
         }
 
         // GET: Posts
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            var posts = db.Posts.Include(p => p.User);
-            return View(posts.ToList());
+            var posts = db.Posts.ToList();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                posts = (from s in db.Posts
+                            where s.Title.Contains(searchString) || s.Content.Contains(searchString)
+                            select s).ToList();
+               
+            }
+            return View(posts);
         }
 
         // GET: Post/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
+             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Post post = db.Posts.Find(id);
