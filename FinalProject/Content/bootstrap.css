@@ -2048,43 +2048,43 @@ fieldset[disabled] .btn {
           box-shadow: none;
 }
 
-.btn-default {
+.btn-danger {
   color: #333333;
   background-color: #ffffff;
   border-color: #cccccc;
 }
 
-.btn-default:hover,
-.btn-default:focus,
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active,
+.open .dropdown-toggle.btn-danger {
   color: #333333;
   background-color: #ebebeb;
   border-color: #adadad;
 }
 
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
+.btn-danger:active,
+.btn-danger.active,
+.open .dropdown-toggle.btn-danger {
   background-image: none;
 }
 
-.btn-default.disabled,
-.btn-default[disabled],
-fieldset[disabled] .btn-default,
-.btn-default.disabled:hover,
-.btn-default[disabled]:hover,
-fieldset[disabled] .btn-default:hover,
-.btn-default.disabled:focus,
-.btn-default[disabled]:focus,
-fieldset[disabled] .btn-default:focus,
-.btn-default.disabled:active,
-.btn-default[disabled]:active,
-fieldset[disabled] .btn-default:active,
-.btn-default.disabled.active,
-.btn-default[disabled].active,
-fieldset[disabled] .btn-default.active {
+.btn-danger.disabled,
+.btn-danger[disabled],
+fieldset[disabled] .btn-danger,
+.btn-danger.disabled:hover,
+.btn-danger[disabled]:hover,
+fieldset[disabled] .btn-danger:hover,
+.btn-danger.disabled:focus,
+.btn-danger[disabled]:focus,
+fieldset[disabled] .btn-danger:focus,
+.btn-danger.disabled:active,
+.btn-danger[disabled]:active,
+fieldset[disabled] .btn-danger:active,
+.btn-danger.disabled.active,
+.btn-danger[disabled].active,
+fieldset[disabled] .btn-danger.active {
   background-color: #ffffff;
   border-color: #cccccc;
 }
@@ -3357,7 +3357,7 @@ input[type="button"].btn-block {
   }
 }
 
-.btn-default .caret {
+.btn-danger .caret {
   border-top-color: #333333;
 }
 
@@ -3369,7 +3369,7 @@ input[type="button"].btn-block {
   border-top-color: #fff;
 }
 
-.dropup .btn-default .caret {
+.dropup .btn-danger .caret {
   border-bottom-color: #333333;
 }
 

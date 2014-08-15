@@ -107,13 +107,13 @@ namespace FinalProject.Controllers
                 {
                     db.Posts.Add(post);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", new {id=post.Id});
                 }
 
                 ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", post.UserId);
                 return View(post);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","User", new {id=User.Identity.GetUserId()});
         }
 
         // GET: Post/Edit/5

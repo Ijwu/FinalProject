@@ -5,21 +5,16 @@
 <div class="jumbotron">
     <h1>Welcome to Budjit</h1>
     <p class="lead">Budjit is a social network blog site that allows you to easily create financial budget postings and share your budgeting details with friends, family and others in your area or across the world in a fun and social way!</p>
+</div>
 
+<div class="jumbotron" id="video">
+    <iframe width="560" height="315" src="//www.youtube.com/embed/2OupJeTPUwE?rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 @if(!Request.IsAuthenticated)
 { 
-    <div class="row">
-        <div class="col-md-4">
-            <h2></h2>
-        </div>
-        <div class="col-md-4">
-            <h2>Get Started Today!</h2>
-            <p></p>
-            <p><a class="btn btn-default" href="https://localhost:44300/Account/Register">Register here &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-        </div>
+    <div style="text-align: center">
+        <h2>Get Started Today!</h2>
+        <p><a class="btn btn-danger" href="https://localhost:44300/Account/Register">Register here &raquo;</a></p>
     </div>
 }
