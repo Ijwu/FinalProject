@@ -184,6 +184,10 @@
     <Content Include="Content\flatly.css" />
     <Content Include="Content\flatly.min.css" />
     <Content Include="Content\images\Budjitlogo1nobkgd.png" />
+    <Content Include="Content\images\carmelita.jpg" />
+    <Content Include="Content\images\Devin.jpg" />
+    <Content Include="Content\images\hussein.jpg" />
+    <Content Include="Content\images\natalie.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
